@@ -8,7 +8,7 @@
   --text-light: #666666;
   --white: #ffffff;
   --bg-light: #f8f9fa;
-  --transition: all 0.3s ease;
+  --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -315,8 +315,8 @@ a {
 }
 
 .teaser-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
   border-color: var(--secondary-color);
 }
 
@@ -404,23 +404,34 @@ a {
   gap: 15px;
 }
 
-.about-img-1 {
+.about-img-1,
+.about-img-2 {
   border-radius: 20px;
-  height: 280px;
-  object-fit: cover;
-  object-position: top center;
-  width: 100%;
+  overflow: hidden;
+  position: relative;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.about-img-1:hover,
+.about-img-2:hover {
+  transform: translateY(-5px);
+}
+
+.about-img-1:hover img,
+.about-img-2:hover img {
+  transform: scale(1.03);
+}
+
+.about-img-1 {
+  height: 280px;
+  width: 100%;
 }
 
 .about-img-2 {
-  border-radius: 20px;
   height: 280px;
-  object-fit: cover;
-  object-position: center center;
   width: 100%;
   margin-top: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Attorneys Section */
@@ -457,7 +468,7 @@ a {
 }
 
 .attorney-card:hover .attorney-image img {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .attorney-card h3 {
@@ -707,7 +718,7 @@ html {
 }
 
 .pa-card:hover .pa-icon {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .pa-card h3 {
