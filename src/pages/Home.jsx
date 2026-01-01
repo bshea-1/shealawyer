@@ -190,7 +190,7 @@ export default function Home() {
                     <h1 id="hero-title">
                         <TypeWriter text={titleText} onComplete={() => setShowSubtitle(true)} />
                     </h1>
-                    <p id="hero-subtitle">{subtitleText || (showSubtitle ? fullSubtitle : '')}</p>
+                    <p id="hero-subtitle">{subtitleText}</p>
                     <div className="hero-buttons">
                         <Link to="/contact" className="cta-button">Schedule Consultation</Link>
                         <Link to="/practice-areas" className="cta-button outline">Explore Services</Link>
