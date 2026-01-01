@@ -1,5 +1,4 @@
 {
-    "minifiy": true,
     "rewrites": [
         {
             "source": "/(.*)",
