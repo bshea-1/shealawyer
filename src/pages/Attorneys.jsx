@@ -115,7 +115,7 @@ export default function Attorneys() {
                     <AnimateOnScroll className="content-wrapper team-approach-section" delay={0.2}>
                         <h2>Our Team Approach</h2>
                         <p>
-                            At Shea Law, we believe that every client deserves personalized attention and aggressive
+                            At The Law Offices of Mitchell Shea, we believe that every client deserves personalized attention and aggressive
                             representation. Our attorneys work collaboratively to ensure that your case receives the benefit of
                             our combined experience and knowledge.
                         </p>
