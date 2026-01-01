@@ -98,29 +98,36 @@ function LoadingImage({ src, alt, className, style }) {
 
     return (
         <div style={{ position: 'relative', ...style }}>
-            {!loaded && (
-                <div
-                    className="image-skeleton"
-                    style={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
-                        backgroundSize: '200% 100%',
-                        animation: 'shimmer 1.5s infinite',
-                        borderRadius: '20px',
-                    }}
-                />
-            )}
+            <div
+                className="image-skeleton"
+                style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+                    backgroundSize: '200% 100%',
+                    animation: 'shimmer 1.5s infinite',
+                    borderRadius: '20px',
+                    opacity: loaded ? 0 : 1,
+                    transition: 'opacity 0.5s ease',
+                    zIndex: 1
+                }}
+            />
             <img
                 src={src}
                 alt={alt}
                 className={className}
                 style={{
                     opacity: loaded ? 1 : 0,
-                    transition: 'opacity 0.3s ease',
+                    transition: 'opacity 0.8s ease',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover'
                 }}
                 onLoad={() => setLoaded(true)}
             />

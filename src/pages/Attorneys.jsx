@@ -26,29 +26,35 @@ function LoadingImage({ src, alt, style }) {
     const [loaded, setLoaded] = useState(false)
 
     return (
-        <>
-            {!loaded && (
-                <div
-                    style={{
-                        ...style,
-                        background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
-                        backgroundSize: '200% 100%',
-                        animation: 'shimmer 1.5s infinite',
-                    }}
-                />
-            )}
+        <div style={{ position: 'relative', width: style.width || '100%', height: style.height || '100%' }}>
+            <div
+                style={{
+                    ...style,
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    opacity: loaded ? 0 : 1,
+                    transition: 'opacity 0.5s ease',
+                    zIndex: 1,
+                    background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+                    backgroundSize: '200% 100%',
+                    animation: 'shimmer 1.5s infinite',
+                }}
+            />
             <img
                 src={src}
                 alt={alt}
                 style={{
                     ...style,
                     opacity: loaded ? 1 : 0,
-                    transition: 'opacity 0.3s ease',
-                    display: loaded ? 'block' : 'none',
+                    transition: 'opacity 0.8s ease',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
                 }}
                 onLoad={() => setLoaded(true)}
             />
-        </>
+        </div>
     )
 }
 
