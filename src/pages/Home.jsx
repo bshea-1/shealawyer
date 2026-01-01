@@ -92,13 +92,57 @@ function TypeWriter({ text, onComplete, speed = 50 }) {
     )
 }
 
+// Image with loading state
+function LoadingImage({ src, alt, className, style }) {
+    const [loaded, setLoaded] = useState(false)
+
+    return (
+        <div style={{ position: 'relative', ...style }}>
+            {!loaded && (
+                <div
+                    className="image-skeleton"
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+                        backgroundSize: '200% 100%',
+                        animation: 'shimmer 1.5s infinite',
+                        borderRadius: '20px',
+                    }}
+                />
+            )}
+            <img
+                src={src}
+                alt={alt}
+                className={className}
+                style={{
+                    opacity: loaded ? 1 : 0,
+                    transition: 'opacity 0.3s ease',
+                }}
+                onLoad={() => setLoaded(true)}
+            />
+        </div>
+    )
+}
+
 export default function Home() {
     const [showSubtitle, setShowSubtitle] = useState(false)
     const [subtitleText, setSubtitleText] = useState('')
+    const [heroLoaded, setHeroLoaded] = useState(false)
     const subtitleComplete = useRef(false)
 
     const titleText = "The Law Offices of Mitchell S. Shea, P.A."
     const fullSubtitle = "Dedicated Legal Representation | Real World Solutions"
+
+    // Preload hero image
+    useEffect(() => {
+        const img = new Image()
+        img.src = heroImg
+        img.onload = () => setHeroLoaded(true)
+    }, [])
 
     useEffect(() => {
         if (showSubtitle && !subtitleComplete.current) {
@@ -118,14 +162,29 @@ export default function Home() {
 
     return (
         <>
+            <style>{`
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+      `}</style>
+
             <ParticleCanvas />
 
             {/* Hero Section */}
-            <section className="hero" id="home" style={{ backgroundImage: `linear-gradient(rgba(0, 43, 73, 0.8), rgba(0, 43, 73, 0.7)), url(${heroImg})` }}>
+            <section
+                className="hero"
+                id="home"
+                style={{
+                    backgroundImage: heroLoaded
+                        ? `linear-gradient(rgba(0, 43, 73, 0.8), rgba(0, 43, 73, 0.7)), url(${heroImg})`
+                        : 'linear-gradient(rgba(0, 43, 73, 0.9), rgba(0, 43, 73, 0.85))',
+                }}
+            >
                 <motion.div
                     className="hero-content"
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={{ opacity: heroLoaded ? 1 : 0.8, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
                 >
                     <h1 id="hero-title">
@@ -181,15 +240,17 @@ export default function Home() {
                             </Link>
                         </AnimateOnScroll>
                         <AnimateOnScroll className="about-images">
-                            <img
+                            <LoadingImage
                                 src={bothImg}
                                 alt="Mitchell Shea and Sharon Nowell"
                                 className="about-img-1"
+                                style={{ height: '280px' }}
                             />
-                            <img
+                            <LoadingImage
                                 src={teamImg}
                                 alt="Legal team meeting"
                                 className="about-img-2"
+                                style={{ height: '280px', marginTop: '30px' }}
                             />
                         </AnimateOnScroll>
                     </div>

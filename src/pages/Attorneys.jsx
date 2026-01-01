@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView } from 'framer-motion'
 import mitchImg from '../assets/images/mitch.jpg'
@@ -21,9 +21,47 @@ function AnimateOnScroll({ children, className = '', delay = 0 }) {
     )
 }
 
+// Image with loading state
+function LoadingImage({ src, alt, style }) {
+    const [loaded, setLoaded] = useState(false)
+
+    return (
+        <>
+            {!loaded && (
+                <div
+                    style={{
+                        ...style,
+                        background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+                        backgroundSize: '200% 100%',
+                        animation: 'shimmer 1.5s infinite',
+                    }}
+                />
+            )}
+            <img
+                src={src}
+                alt={alt}
+                style={{
+                    ...style,
+                    opacity: loaded ? 1 : 0,
+                    transition: 'opacity 0.3s ease',
+                    display: loaded ? 'block' : 'none',
+                }}
+                onLoad={() => setLoaded(true)}
+            />
+        </>
+    )
+}
+
 export default function Attorneys() {
     return (
         <>
+            <style>{`
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+      `}</style>
+
             <div className="page-header">
                 <div className="container">
                     <AnimateOnScroll>
@@ -38,10 +76,10 @@ export default function Attorneys() {
                     <AnimateOnScroll className="attorneys-grid">
                         <div className="attorney-card">
                             <div className="attorney-image">
-                                <img
+                                <LoadingImage
                                     src={mitchImg}
                                     alt="Mitchell S. Shea"
-                                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', borderRadius: '20px' }}
                                 />
                             </div>
                             <h3>Mitchell S. Shea</h3>
@@ -53,10 +91,10 @@ export default function Attorneys() {
                         </div>
                         <div className="attorney-card">
                             <div className="attorney-image">
-                                <img
+                                <LoadingImage
                                     src={sharonImg}
                                     alt="Sharon Nowell"
-                                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' }}
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', borderRadius: '20px' }}
                                 />
                             </div>
                             <h3>Sharon Nowell</h3>

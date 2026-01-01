@@ -1,5 +1,4 @@
-import { useRef } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 function AnimateOnScroll({ children, className = '', delay = 0 }) {
@@ -20,8 +19,17 @@ function AnimateOnScroll({ children, className = '', delay = 0 }) {
 }
 
 export default function Contact() {
+    const [mapLoaded, setMapLoaded] = useState(false)
+
     return (
         <>
+            <style>{`
+        @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+      `}</style>
+
             <div className="page-header">
                 <div className="container">
                     <AnimateOnScroll>
@@ -70,15 +78,42 @@ export default function Contact() {
                             </div>
 
                             <div className="map-container">
+                                {!mapLoaded && (
+                                    <div
+                                        style={{
+                                            position: 'absolute',
+                                            top: 0,
+                                            left: 0,
+                                            right: 0,
+                                            bottom: 0,
+                                            background: 'linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%)',
+                                            backgroundSize: '200% 100%',
+                                            animation: 'shimmer 1.5s infinite',
+                                            borderRadius: '20px',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            color: '#999',
+                                            fontSize: '0.9rem',
+                                        }}
+                                    >
+                                        Loading map...
+                                    </div>
+                                )}
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3581.442973809623!2d-80.264444!3d26.136944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d90868f0000001%3A0x0!2s1776%20N%20Pine%20Island%20Rd%20%23310%2C%20Plantation%2C%20FL%2033322!5e0!3m2!1sen!2sus!4v1703640000000!5m2!1sen!2sus"
                                     width="100%"
                                     height="100%"
-                                    style={{ border: 0 }}
+                                    style={{
+                                        border: 0,
+                                        opacity: mapLoaded ? 1 : 0,
+                                        transition: 'opacity 0.3s ease',
+                                    }}
                                     allowFullScreen=""
                                     loading="eager"
                                     referrerPolicy="no-referrer-when-downgrade"
                                     title="Office Location Map"
+                                    onLoad={() => setMapLoaded(true)}
                                 ></iframe>
                             </div>
                         </div>
@@ -139,6 +174,7 @@ export default function Contact() {
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
           height: 400px;
           background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
+          position: relative;
         }
 
         @media (max-width: 900px) {
