@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion'
 
 function AnimateOnScroll({ children, className = '', delay = 0 }) {
     const ref = useRef(null)
-    const isInView = useInView(ref, { once: true, margin: '-50px' })
+    const isInView = useInView(ref, { once: true, margin: '0px' })
 
     return (
         <motion.div

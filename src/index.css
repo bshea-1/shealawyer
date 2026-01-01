@@ -559,7 +559,7 @@ html {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(0, 43, 73, 0.9) 0%, rgba(0, 31, 53, 0.95) 100%);
+  background: var(--primary-dark);
 }
 
 .page-header h1 {
@@ -735,7 +735,7 @@ html {
 /* Removed: .pa-card:hover .pa-link letter-spacing effect */
 
 .pa-card-featured {
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  background: var(--primary-color);
   min-height: 320px;
 }
 
@@ -760,15 +760,7 @@ html {
   font-size: 3.5rem;
 }
 
-.pa-card-gradient {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(135deg, transparent 0%, rgba(197, 160, 89, 0.1) 100%);
-  z-index: 1;
-}
+/* .pa-card-gradient removed as requested */
 
 .pa-card-badge {
   position: absolute;
@@ -789,7 +781,7 @@ html {
   text-align: center;
   margin-top: 80px;
   padding: 60px;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  background: var(--primary-color);
   border-radius: 25px;
   color: var(--white);
 }

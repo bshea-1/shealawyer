@@ -4,7 +4,7 @@ import { motion, useInView } from 'framer-motion'
 
 function AnimateOnScroll({ children, className = '', delay = 0 }) {
     const ref = useRef(null)
-    const isInView = useInView(ref, { once: true, margin: '-50px' })
+    const isInView = useInView(ref, { once: true, margin: '0px' })
 
     return (
         <motion.div
@@ -46,7 +46,7 @@ export default function PracticeAreas() {
                     <AnimateOnScroll className="pa-grid" delay={0.1}>
                         {/* Featured Card - Workers' Comp */}
                         <Link to="/workers-comp" className="pa-card pa-card-featured">
-                            <div className="pa-card-gradient"></div>
+
                             <div className="pa-card-content">
                                 <span className="pa-icon">🏗️</span>
                                 <h3>Workers' Compensation</h3>
@@ -61,7 +61,7 @@ export default function PracticeAreas() {
 
                         {/* Featured Card - Personal Injury */}
                         <Link to="/personal-injury" className="pa-card pa-card-featured">
-                            <div className="pa-card-gradient"></div>
+
                             <div className="pa-card-content">
                                 <span className="pa-icon">🤕</span>
                                 <h3>Personal Injury</h3>
