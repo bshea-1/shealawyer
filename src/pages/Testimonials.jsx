@@ -327,7 +327,7 @@ export default function Testimonials() {
           text-align: center;
           margin-top: 80px;
           padding: 60px;
-          background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+          background: var(--primary-color);
           border-radius: 25px;
           color: var(--white);
           max-width: 900px;

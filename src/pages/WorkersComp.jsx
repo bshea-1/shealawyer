@@ -36,9 +36,6 @@ export default function WorkersComp() {
                                 to medical care, wage replacement, and other benefits. I represent injured workers—not insurance
                                 companies—and help them navigate the workers' compensation system with clarity and confidence.
                             </p>
-                            <div style={{ textAlign: 'center', margin: '30px 0' }}>
-                                <Link to="/contact" className="cta-button">📞 Schedule a Consultation</Link>
-                            </div>
                         </div>
 
                         <h2>Understanding Your Rights</h2>

@@ -37,9 +37,6 @@ export default function LongshoreComp() {
                                 (LHWCA). I represent injured maritime workers—not employers or insurance carriers—and help them
                                 pursue the benefits provided under federal law.
                             </p>
-                            <div style={{ textAlign: 'center', margin: '30px 0' }}>
-                                <Link to="/contact" className="cta-button">📞 Request a Consultation</Link>
-                            </div>
                         </div>
 
                         <h2>Understanding Maritime Injury Claims</h2>

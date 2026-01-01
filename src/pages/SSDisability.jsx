@@ -36,9 +36,6 @@ export default function SSDisability() {
                                 Disability Insurance (SSDI) or Supplemental Security Income (SSI) benefits. I help disabled
                                 individuals navigate the complex application and appeals process to secure the benefits they deserve.
                             </p>
-                            <div style={{ textAlign: 'center', margin: '30px 0' }}>
-                                <Link to="/contact" className="cta-button">📞 Schedule a Consultation</Link>
-                            </div>
                         </div>
 
                         <h2>Understanding Social Security Disability</h2>

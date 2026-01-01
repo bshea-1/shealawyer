@@ -36,9 +36,6 @@ export default function PersonalInjury() {
                                 compensation for your medical expenses, lost wages, pain and suffering, and more. I represent
                                 accident victims throughout Florida, fighting to secure the maximum compensation you deserve.
                             </p>
-                            <div style={{ textAlign: 'center', margin: '30px 0' }}>
-                                <Link to="/contact" className="cta-button">📞 Free Consultation</Link>
-                            </div>
                         </div>
 
                         <h2>Types of Personal Injury Cases</h2>

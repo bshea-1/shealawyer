@@ -36,9 +36,6 @@ export default function Mediation() {
                                 services for civil disputes. Mediation offers parties a cost-effective, confidential alternative
                                 to costly and time-consuming litigation.
                             </p>
-                            <div style={{ textAlign: 'center', margin: '30px 0' }}>
-                                <Link to="/contact" className="cta-button">📞 Schedule Mediation</Link>
-                            </div>
                         </div>
 
                         <h2>What is Mediation?</h2>
