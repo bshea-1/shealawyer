@@ -1,0 +1,46 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+.npm
+
+# Build
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Vercel
+.vercel
+
+# Old HTML files (now migrated to React)
+attorneys.html
+contact.html
+longshore-comp.html
+mediation.html
+personal-injury.html
+practice-areas.html
+ss-disability.html
+testimonials.html
+workers-comp.html
+cleanup.py
+fix_nav.py
+script.js
+style.css
