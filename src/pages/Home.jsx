@@ -29,9 +29,11 @@ function Counter({ target }) {
     const ref = useRef(null)
     const isInView = useInView(ref, { once: true })
     const [count, setCount] = useState(0)
+    const hasAnimated = useRef(false)
 
     useEffect(() => {
-        if (!isInView) return
+        if (!isInView || hasAnimated.current) return
+        hasAnimated.current = true
 
         const duration = 2000
         const steps = 60
@@ -54,11 +56,18 @@ function Counter({ target }) {
     return <span ref={ref}>{count}</span>
 }
 
+// TypeWriter that only runs once and persists its state
 function TypeWriter({ text, onComplete, speed = 50 }) {
     const [displayText, setDisplayText] = useState('')
     const [showCursor, setShowCursor] = useState(true)
+    const [isComplete, setIsComplete] = useState(false)
+    const hasStarted = useRef(false)
 
     useEffect(() => {
+        // Only run once
+        if (hasStarted.current) return
+        hasStarted.current = true
+
         let i = 0
         const timer = setInterval(() => {
             if (i < text.length) {
@@ -67,17 +76,18 @@ function TypeWriter({ text, onComplete, speed = 50 }) {
             } else {
                 clearInterval(timer)
                 setShowCursor(false)
+                setIsComplete(true)
                 if (onComplete) setTimeout(onComplete, 500)
             }
         }, speed)
 
         return () => clearInterval(timer)
-    }, [text, speed, onComplete])
+    }, []) // Empty dependency array - only run once on mount
 
     return (
         <span>
-            {displayText}
-            {showCursor && <span className="typing-cursor"></span>}
+            {isComplete ? text : displayText}
+            {showCursor && !isComplete && <span className="typing-cursor"></span>}
         </span>
     )
 }
@@ -85,12 +95,14 @@ function TypeWriter({ text, onComplete, speed = 50 }) {
 export default function Home() {
     const [showSubtitle, setShowSubtitle] = useState(false)
     const [subtitleText, setSubtitleText] = useState('')
+    const subtitleComplete = useRef(false)
 
     const titleText = "The Law Offices of Mitchell S. Shea, P.A."
     const fullSubtitle = "Dedicated Legal Representation | Real World Solutions"
 
     useEffect(() => {
-        if (showSubtitle) {
+        if (showSubtitle && !subtitleComplete.current) {
+            subtitleComplete.current = true
             let i = 0
             const timer = setInterval(() => {
                 if (i < fullSubtitle.length) {
@@ -119,7 +131,7 @@ export default function Home() {
                     <h1 id="hero-title">
                         <TypeWriter text={titleText} onComplete={() => setShowSubtitle(true)} />
                     </h1>
-                    <p id="hero-subtitle">{subtitleText}</p>
+                    <p id="hero-subtitle">{subtitleText || (showSubtitle ? fullSubtitle : '')}</p>
                     <div className="hero-buttons">
                         <Link to="/contact" className="cta-button">Schedule Consultation</Link>
                         <Link to="/practice-areas" className="cta-button outline">Explore Services</Link>
@@ -148,9 +160,9 @@ export default function Home() {
             </section>
 
             {/* About / Real World Solutions */}
-            <section className="about-section" style={{ padding: '100px 0', backgroundColor: 'var(--white)', position: 'relative', zIndex: 2 }}>
+            <section className="about-section">
                 <div className="container">
-                    <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '50px', alignItems: 'center' }}>
+                    <div className="about-grid">
                         <AnimateOnScroll className="about-content">
                             <div className="section-header" style={{ textAlign: 'left', marginBottom: '30px' }}>
                                 <h2>Real World Solutions</h2>
@@ -168,16 +180,16 @@ export default function Home() {
                                 Meet Our Team <span style={{ marginLeft: '5px' }}>→</span>
                             </Link>
                         </AnimateOnScroll>
-                        <AnimateOnScroll className="about-images" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '15px' }}>
+                        <AnimateOnScroll className="about-images">
                             <img
                                 src={bothImg}
                                 alt="Mitchell Shea and Sharon Nowell"
-                                style={{ borderRadius: '20px', height: '300px', objectFit: 'cover', objectPosition: 'top', width: '100%', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
+                                className="about-img-1"
                             />
                             <img
                                 src={teamImg}
                                 alt="Legal team meeting"
-                                style={{ borderRadius: '20px', height: '300px', objectFit: 'cover', objectPosition: 'center', width: '100%', marginTop: '30px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
+                                className="about-img-2"
                             />
                         </AnimateOnScroll>
                     </div>

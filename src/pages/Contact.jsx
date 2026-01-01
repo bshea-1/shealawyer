@@ -33,14 +33,10 @@ export default function Contact() {
 
             <div className="page-content">
                 <div className="container">
-                    <AnimateOnScroll
-                        className="content-wrapper"
-                        style={{ maxWidth: '1200px', padding: 0, background: 'transparent', boxShadow: 'none' }}
-                    >
+                    <AnimateOnScroll>
                         <div className="contact-grid">
                             <div className="contact-info-card">
                                 <h2>Contact Information</h2>
-                                <div className="section-divider" style={{ margin: '15px 0 30px', marginLeft: 0 }}></div>
 
                                 <div className="contact-detail">
                                     <h3>📍 Office Location</h3>
@@ -64,7 +60,7 @@ export default function Contact() {
                                     </p>
                                 </div>
 
-                                <div className="contact-detail">
+                                <div className="contact-detail" style={{ marginBottom: 0 }}>
                                     <h3>🕒 Office Hours</h3>
                                     <p>
                                         Monday - Friday: 9:00 AM - 5:00 PM<br />
@@ -73,10 +69,7 @@ export default function Contact() {
                                 </div>
                             </div>
 
-                            <div
-                                className="map-container"
-                                style={{ background: 'linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%)' }}
-                            >
+                            <div className="map-container">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3581.442973809623!2d-80.264444!3d26.136944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d90868f0000001%3A0x0!2s1776%20N%20Pine%20Island%20Rd%20%23310%2C%20Plantation%2C%20FL%2033322!5e0!3m2!1sen!2sus!4v1703640000000!5m2!1sen!2sus"
                                     width="100%"
@@ -97,31 +90,42 @@ export default function Contact() {
         .contact-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 60px;
-          margin-top: 40px;
+          gap: 40px;
+          align-items: start;
         }
 
         .contact-info-card {
           background: white;
-          padding: 40px;
+          padding: 35px;
           border-radius: 20px;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
         }
 
+        .contact-info-card h2 {
+          color: var(--primary-color);
+          margin-bottom: 25px;
+          font-size: 1.8rem;
+          border-bottom: 2px solid var(--secondary-color);
+          padding-bottom: 10px;
+        }
+
         .contact-detail {
-          margin-bottom: 30px;
+          margin-bottom: 20px;
         }
 
         .contact-detail h3 {
           color: var(--primary-color);
-          margin-bottom: 10px;
-          font-size: 1.3rem;
+          margin-bottom: 8px;
+          font-size: 1.1rem;
+          font-family: 'Outfit', sans-serif;
+          font-weight: 600;
         }
 
         .contact-detail p {
           color: var(--text-light);
-          font-size: 1.1rem;
+          font-size: 1rem;
           line-height: 1.6;
+          margin: 0;
         }
 
         .contact-detail a {
@@ -133,13 +137,17 @@ export default function Contact() {
           border-radius: 20px;
           overflow: hidden;
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-          height: 100%;
-          min-height: 400px;
+          height: 400px;
+          background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
         }
 
         @media (max-width: 900px) {
           .contact-grid {
             grid-template-columns: 1fr;
+          }
+          
+          .map-container {
+            height: 350px;
           }
         }
       `}</style>

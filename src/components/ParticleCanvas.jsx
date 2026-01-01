@@ -11,6 +11,7 @@ export default function ParticleCanvas() {
         let width, height
         let particles = []
         let animationId
+        let resizeTimeout
 
         function resize() {
             width = canvas.width = window.innerWidth
@@ -18,15 +19,22 @@ export default function ParticleCanvas() {
             initParticles()
         }
 
+        // Debounced resize for better performance
+        function handleResize() {
+            clearTimeout(resizeTimeout)
+            resizeTimeout = setTimeout(resize, 100)
+        }
+
         function initParticles() {
             particles = []
-            const numParticles = Math.floor((width * height) / 15000)
+            // Fewer particles for better performance
+            const numParticles = Math.min(50, Math.floor((width * height) / 25000))
             for (let i = 0; i < numParticles; i++) {
                 particles.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3,
                     size: Math.random() * 2 + 1,
                 })
             }
@@ -53,14 +61,16 @@ export default function ParticleCanvas() {
                 ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
                 ctx.fill()
 
-                // Connect
+                // Connect - reduced distance check for performance
                 for (let j = i + 1; j < particles.length; j++) {
                     const p2 = particles[j]
                     const dx = p.x - p2.x
                     const dy = p.y - p2.y
-                    const dist = Math.sqrt(dx * dx + dy * dy)
+                    const distSquared = dx * dx + dy * dy
 
-                    if (dist < 150) {
+                    // Use squared distance to avoid expensive sqrt
+                    if (distSquared < 22500) { // 150^2
+                        const dist = Math.sqrt(distSquared)
                         ctx.lineWidth = 1 - dist / 150
                         ctx.beginPath()
                         ctx.moveTo(p.x, p.y)
@@ -73,13 +83,14 @@ export default function ParticleCanvas() {
             animationId = requestAnimationFrame(draw)
         }
 
-        window.addEventListener('resize', resize)
+        window.addEventListener('resize', handleResize)
         resize()
         draw()
 
         return () => {
-            window.removeEventListener('resize', resize)
+            window.removeEventListener('resize', handleResize)
             cancelAnimationFrame(animationId)
+            clearTimeout(resizeTimeout)
         }
     }, [])
 

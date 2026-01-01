@@ -68,7 +68,7 @@ export default function Attorneys() {
                         </div>
                     </AnimateOnScroll>
 
-                    <AnimateOnScroll className="content-wrapper" style={{ marginTop: '60px' }} delay={0.2}>
+                    <AnimateOnScroll className="content-wrapper team-approach-section" delay={0.2}>
                         <h2>Our Team Approach</h2>
                         <p>
                             At Shea Law, we believe that every client deserves personalized attention and aggressive
@@ -81,6 +81,12 @@ export default function Attorneys() {
                     </AnimateOnScroll>
                 </div>
             </div>
+
+            <style>{`
+        .team-approach-section {
+          margin-top: 80px !important;
+        }
+      `}</style>
         </>
     )
 }
